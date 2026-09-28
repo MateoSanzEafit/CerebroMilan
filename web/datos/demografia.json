@@ -1,0 +1,111 @@
+{
+  "tema": "demografia",
+  "probado": "2026-09-28",
+  "fuentes": [
+    {
+      "id": "comune_milano_demografia",
+      "nombre": "Comune di Milano - Famiglie residenti per municipio (ds133)",
+      "url": "https://dati.comune.milano.it/dataset/6eaedaa7-0ddf-44fc-a33c-45f2ebe95d3f/resource/fb84e80d-c065-40db-97fc-500e46b9380d/download/ds133_popolazione_residenti_famiglie_zona_2003_2021.json",
+      "estado": "vivo",
+      "licencia": "IODL 2.0 / CC-BY"
+    }
+  ],
+  "cifras": {
+    "familias_residentes_ultimo_anio": {
+      "valor": 620587,
+      "unidad": "familias censadas en el padrón",
+      "vigencia": "2021",
+      "fuente": "comune_milano_demografia"
+    },
+    "poblacion_estimada_familias": {
+      "valor": 1002644,
+      "unidad": "habitantes en hogares familiares",
+      "vigencia": "2021",
+      "fuente": "comune_milano_demografia"
+    }
+  },
+  "series": {
+    "evolucion_familias": {
+      "unidad": "familias residentes",
+      "fuente": "comune_milano_demografia",
+      "puntos": [
+        [
+          "2003",
+          519686
+        ],
+        [
+          "2004",
+          535036
+        ],
+        [
+          "2005",
+          543060
+        ],
+        [
+          "2006",
+          543476
+        ],
+        [
+          "2007",
+          541646
+        ],
+        [
+          "2008",
+          543642
+        ],
+        [
+          "2009",
+          553172
+        ],
+        [
+          "2010",
+          566069
+        ],
+        [
+          "2011",
+          578356
+        ],
+        [
+          "2012",
+          587022
+        ],
+        [
+          "2013",
+          582496
+        ],
+        [
+          "2014",
+          583151
+        ],
+        [
+          "2015",
+          585490
+        ],
+        [
+          "2016",
+          589386
+        ],
+        [
+          "2017",
+          595542
+        ],
+        [
+          "2018",
+          603868
+        ],
+        [
+          "2019",
+          616376
+        ],
+        [
+          "2020",
+          618088
+        ],
+        [
+          "2021",
+          620587
+        ]
+      ]
+    }
+  }
+}

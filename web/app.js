@@ -68,26 +68,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // Intentar cargar dinámicamente desde el lago o usar el estado limpio
   async function cargarLago() {
     try {
-      const rEscucha = await fetch('../lago/escucha.json').then(r => r.json());
+      const rEscucha = await fetch('datos/escucha.json').then(r => r.json());
       DATOS_LAGO.escucha.vistas = rEscucha.cifras.vistas_ultimo_mes.valor;
       DATOS_LAGO.escucha.vigencia = rEscucha.cifras.vistas_ultimo_mes.vigencia;
     } catch(e) {}
 
     try {
-      const rSeg = await fetch('../lago/seguridad.json').then(r => r.json());
+      const rSeg = await fetch('datos/seguridad.json').then(r => r.json());
       DATOS_LAGO.seguridad.incidentes = rSeg.cifras.incidentes_ultimo_anio.valor;
       DATOS_LAGO.seguridad.vigencia = rSeg.cifras.incidentes_ultimo_anio.vigencia;
     } catch(e) {}
 
     try {
-      const rDem = await fetch('../lago/demografia.json').then(r => r.json());
+      const rDem = await fetch('datos/demografia.json').then(r => r.json());
       DATOS_LAGO.demografia.familias = rDem.cifras.familias_residentes_ultimo_anio.valor;
       DATOS_LAGO.demografia.poblacion = rDem.cifras.poblacion_estimada_familias.valor;
       DATOS_LAGO.demografia.vigencia = rDem.cifras.familias_residentes_ultimo_anio.vigencia;
     } catch(e) {}
 
     try {
-      const rAmb = await fetch('../lago/ambiente.json').then(r => r.json());
+      const rAmb = await fetch('datos/ambiente.json').then(r => r.json());
       DATOS_LAGO.ambiente.no2 = rAmb.cifras.promedio_no2.valor;
       DATOS_LAGO.ambiente.pm10 = rAmb.cifras.promedio_pm10.valor;
       DATOS_LAGO.ambiente.vigencia = rAmb.cifras.promedio_no2.vigencia;

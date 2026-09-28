@@ -1,0 +1,43 @@
+{
+  "tema": "ambiente",
+  "probado": "2026-09-28",
+  "fuentes": [
+    {
+      "id": "comune_milano_aria",
+      "nombre": "Comune di Milano - Rilevazione qualità dell'aria (ds2969)",
+      "url": "https://dati.comune.milano.it/dataset/884b70a5-951c-4c92-931e-52a73d20af9f/resource/ddecb297-6e09-456e-aed3-7c934eec4dd3/download/qaria_datoariagiornostazione_2026-09-26.json",
+      "estado": "vivo",
+      "licencia": "Creative Commons Attribution"
+    }
+  ],
+  "cifras": {
+    "promedio_no2": {
+      "valor": 59.92,
+      "unidad": "µg/m³ (Dióxido de nitrógeno)",
+      "vigencia": "2026-03-31",
+      "fuente": "comune_milano_aria"
+    },
+    "promedio_pm10": {
+      "valor": 30.4,
+      "unidad": "µg/m³ (Partículas suspendidas PM10)",
+      "vigencia": "2026-03-31",
+      "fuente": "comune_milano_aria"
+    }
+  },
+  "series": {
+    "resumen_contaminantes": {
+      "unidad": "µg/m³ promedio",
+      "fuente": "comune_milano_aria",
+      "puntos": [
+        [
+          "NO2",
+          59.92
+        ],
+        [
+          "PM10",
+          30.4
+        ]
+      ]
+    }
+  }
+}
