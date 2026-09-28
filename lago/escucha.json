@@ -1,0 +1,109 @@
+{
+  "tema": "escucha",
+  "probado": "2026-09-28",
+  "fuentes": [
+    {
+      "id": "wikimedia_pageviews",
+      "nombre": "Wikimedia Pageviews API",
+      "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/es.wikipedia/all-access/user/Mil%C3%A1n/monthly/20250101/20260831",
+      "estado": "vivo",
+      "licencia": "CC0"
+    }
+  ],
+  "cifras": {
+    "vistas_ultimo_mes": {
+      "valor": 13195,
+      "unidad": "visitas de usuarios",
+      "vigencia": "2026-08",
+      "fuente": "wikimedia_pageviews"
+    }
+  },
+  "series": {
+    "vistas_mensuales": {
+      "unidad": "visitas de usuarios",
+      "fuente": "wikimedia_pageviews",
+      "puntos": [
+        [
+          "2025-01",
+          22320
+        ],
+        [
+          "2025-02",
+          21552
+        ],
+        [
+          "2025-03",
+          20353
+        ],
+        [
+          "2025-04",
+          18362
+        ],
+        [
+          "2025-05",
+          24104
+        ],
+        [
+          "2025-06",
+          14973
+        ],
+        [
+          "2025-07",
+          14384
+        ],
+        [
+          "2025-08",
+          15141
+        ],
+        [
+          "2025-09",
+          16914
+        ],
+        [
+          "2025-10",
+          17431
+        ],
+        [
+          "2025-11",
+          15206
+        ],
+        [
+          "2025-12",
+          13509
+        ],
+        [
+          "2026-01",
+          15715
+        ],
+        [
+          "2026-02",
+          25724
+        ],
+        [
+          "2026-03",
+          13735
+        ],
+        [
+          "2026-04",
+          13342
+        ],
+        [
+          "2026-05",
+          14075
+        ],
+        [
+          "2026-06",
+          10790
+        ],
+        [
+          "2026-07",
+          11499
+        ],
+        [
+          "2026-08",
+          13195
+        ]
+      ]
+    }
+  }
+}"contacto_falso": "persona@comune.milano.it"

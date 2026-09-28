@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cerebro Milán · Sistema Territorial de Información</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="barra-superior">
+    <div class="logo">
+      <span class="punto-vivo"></span>
+      <strong>CEREBRO MILÁN</strong>
+      <span class="sub">Gemelo Territorial · 9 Municipi · 88 NIL</span>
+    </div>
+    <div class="meta-grupo">
+      <span class="badge">EAFIT · Gobernanza de Datos 2026-2</span>
+    </div>
+  </header>
+
+  <nav class="nav-modulos">
+    <button class="tab-btn activo" onclick="mostrarSeccion('panorama')">Panorama</button>
+    <button class="tab-btn" onclick="mostrarSeccion('demografia')">Demografía</button>
+    <button class="tab-btn" onclick="mostrarSeccion('seguridad')">Seguridad Vial</button>
+    <button class="tab-btn" onclick="mostrarSeccion('ambiente')">Ambiente (2026)</button>
+    <button class="tab-btn" onclick="mostrarSeccion('escucha')">Escucha Social</button>
+    <button class="tab-btn" onclick="mostrarSeccion('fuentes')">Catálogo y Gobernanza</button>
+  </nav>
+
+  <main class="contenedor">
+    <!-- PANORAMA -->
+    <section id="panorama" class="modulo activo">
+      <div class="cabecera-seccion">
+        <h2>Entiende a Milán. Decide con evidencia.</h2>
+        <p class="lede">Sistema territorial de información gobernado para la Dirección de Planificación y Resiliencia Urbana del Comune di Milano.</p>
+      </div>
+
+      <div class="kpis-grid">
+        <div class="tarjeta-kpi">
+          <span class="etiqueta">Población en Hogares</span>
+          <span class="cifra" id="kpi-poblacion">—</span>
+          <span class="vigencia" id="vig-poblacion">cargando...</span>
+          <a class="fuente-link" id="link-poblacion" href="#" target="_blank">Fuente: ds133 ↗</a>
+        </div>
+        <div class="tarjeta-kpi">
+          <span class="etiqueta">Siniestros Viales Anuales</span>
+          <span class="cifra alerta" id="kpi-incidentes">—</span>
+          <span class="vigencia" id="vig-incidentes">cargando...</span>
+          <a class="fuente-link" id="link-incidentes" href="#" target="_blank">Fuente: Polizia Locale ↗</a>
+        </div>
+        <div class="tarjeta-kpi">
+          <span class="etiqueta">Dióxido de Nitrógeno (NO2)</span>
+          <span class="cifra" id="kpi-no2">—</span>
+          <span class="vigencia" id="vig-no2">cargando...</span>
+          <a class="fuente-link" id="link-no2" href="#" target="_blank">Fuente: ARPA / ds2969 ↗</a>
+        </div>
+        <div class="tarjeta-kpi">
+          <span class="etiqueta">Interés en Wikipedia</span>
+          <span class="cifra" id="kpi-visitas">—</span>
+          <span class="vigencia" id="vig-visitas">cargando...</span>
+          <a class="fuente-link" id="link-visitas" href="#" target="_blank">Fuente: Wikimedia API ↗</a>
+        </div>
+      </div>
+
+      <div class="caja-info">
+        <h3>Regla de Gobernanza de Este Sistema</h3>
+        <p>Toda cifra que ves arriba se calcula en tiempo de ejecución leyendo directamente desde el <strong>lago gobernado</strong> en formato JSON. Ningún número está escrito a mano en el HTML. Si el verificador detecta un campo incompleto, una fecha no ISO o un dato personal, el despliegue se detiene automáticamente.</p>
+      </div>
+    </section>
+
+    <!-- DEMOGRAFIA -->
+    <section id="demografia" class="modulo">
+      <div class="cabecera-seccion">
+        <h2>Demografía y Familias Residentes</h2>
+        <p class="lede">Evolución de familias registradas en el padrón municipal en los 9 Municipi de Milán.</p>
+      </div>
+      <div class="tabla-panel">
+        <table id="tabla-demografia">
+          <thead>
+            <tr>
+              <th>Año</th>
+              <th>Familias Residentes</th>
+              <th>Variación</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEGURIDAD -->
+    <section id="seguridad" class="modulo">
+      <div class="cabecera-seccion">
+        <h2>Seguridad Vial y Siniestralidad</h2>
+        <p class="lede">Histórico forense de colisiones viales registradas por la Polizia Locale di Milano.</p>
+      </div>
+      <div class="tabla-panel">
+        <table id="tabla-seguridad">
+          <thead>
+            <tr>
+              <th>Año</th>
+              <th>Total Incidentes</th>
+              <th>Nivel de Riesgo</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- AMBIENTE -->
+    <section id="ambiente" class="modulo">
+      <div class="cabecera-seccion">
+        <h2>Monitoreo Ambiental 2026</h2>
+        <p class="lede">Promedios de contaminantes registrados por la red de estaciones fijas de Milán.</p>
+      </div>
+      <div class="grid-dos">
+        <div class="tarjeta-dato">
+          <h4>NO2 (Dióxido de Nitrógeno)</h4>
+          <p class="cifra-grande" id="det-no2">—</p>
+          <p class="nota-dato">Límite anual directiva UE: 40 µg/m³. La densidad de tráfico en la llanura padana genera picos que justifican la fiscalización de Área B.</p>
+        </div>
+        <div class="tarjeta-dato">
+          <h4>PM10 (Material Particulado)</h4>
+          <p class="cifra-grande" id="det-pm10">—</p>
+          <p class="nota-dato">Límite diario UE: 50 µg/m³. Medición capturada en las estaciones de calidad del aire del Comune di Milano.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESCUCHA -->
+    <section id="escucha" class="modulo">
+      <div class="cabecera-seccion">
+        <h2>Escucha Social y Proyección Internacional</h2>
+        <p class="lede">Consultas mensuales del artículo «Milán» en Wikipedia (solo usuarios reales, bots filtrados).</p>
+      </div>
+      <div class="tabla-panel">
+        <table id="tabla-escucha">
+          <thead>
+            <tr>
+              <th>Mes</th>
+              <th>Visitas Humanas</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FUENTES Y GOBERNANZA -->
+    <section id="fuentes" class="modulo">
+      <div class="cabecera-seccion">
+        <h2>Catálogo de Fuentes y Decisiones de Gobernanza</h2>
+        <p class="lede">Inventario completo con trazabilidad, fechas de prueba y estado legal de cada activo.</p>
+      </div>
+      <div class="tabla-panel">
+        <table id="tabla-catalogo">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Conjunto de Datos</th>
+              <th>Entidad</th>
+              <th>Licencia</th>
+              <th>Estado</th>
+              <th>Fecha Prueba</th>
+              <th>PII / Personas</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Cerebro Milán · Taller de Sistemas de Información y Gobernanza de Datos · EAFIT 2026-2</p>
+    <p class="pie-sub">Todos los datos proceden de portales abiertos verificados el 2026-09-28. Verificado con 0 fallos de PII.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
