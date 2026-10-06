@@ -12,6 +12,95 @@ function mostrarSeccion(id) {
     b.getAttribute('onclick')?.includes(id)
   );
   if (btnActivo) btnActivo.classList.add('activo');
+
+  if (id === 'territorio') {
+    setTimeout(initMapaTerritorial, 100);
+  }
+}
+
+let mapaInicializado = false;
+function initMapaTerritorial() {
+  if (mapaInicializado && window._mapaMilan) {
+    window._mapaMilan.invalidateSize();
+    return;
+  }
+  const el = document.getElementById('mapa-milan');
+  if (!el || typeof L === 'undefined') return;
+
+  const map = L.map('mapa-milan').setView([45.4642, 9.1900], 12);
+  window._mapaMilan = map;
+  mapaInicializado = true;
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+    subdomains: 'abcd',
+    maxZoom: 18
+  }).addTo(map);
+
+  // Cargar polígonos de los 88 NIL (F01)
+  fetch('datos/nil.geojson')
+    .then(r => r.json())
+    .then(data => {
+      const nilLayer = L.geoJSON(data, {
+        style: () => ({
+          color: '#00d2d3',
+          weight: 1.5,
+          fillColor: '#1e56a0',
+          fillOpacity: 0.35
+        }),
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties || {};
+          const id = p.ID_NIL || '—';
+          const nom = p.NIL || 'NIL';
+          const area = p.Shape_Area ? (p.Shape_Area / 1e6).toFixed(2) : '—';
+          const perim = p.Shape_Length ? Math.round(p.Shape_Length).toLocaleString() : '—';
+
+          layer.on({
+            mouseover: (e) => {
+              e.target.setStyle({ weight: 2.5, color: '#ffffff', fillOpacity: 0.65 });
+            },
+            mouseout: (e) => {
+              nilLayer.resetStyle(e.target);
+            },
+            click: () => {
+              document.getElementById('nil-instruccion').style.display = 'none';
+              document.getElementById('nil-detalles').style.display = 'flex';
+              document.getElementById('nil-id').textContent = id;
+              document.getElementById('nil-nombre').textContent = nom;
+              document.getElementById('nil-area').textContent = `${area} km²`;
+              document.getElementById('nil-perimetro').textContent = `${perim} m`;
+              layer.bindPopup(`<strong>NIL ${id}: ${nom}</strong><br>Superficie: ${area} km²<br>Normativa: PGT Milano 2030`).openPopup();
+            }
+          });
+        }
+      }).addTo(map);
+
+      // Cargar estaciones BikeMi (F04)
+      fetch('datos/bikemi.geojson')
+        .then(r => r.json())
+        .then(dataBike => {
+          L.geoJSON(dataBike, {
+            pointToLayer: (feature, latlng) => {
+              return L.circleMarker(latlng, {
+                radius: 3,
+                fillColor: '#ff7675',
+                color: '#fff',
+                weight: 0.5,
+                opacity: 1,
+                fillOpacity: 0.85
+              });
+            },
+            onEachFeature: (feature, layer) => {
+              const bProps = feature.properties || {};
+              const nombre = bProps.nome || bProps.name || 'Estación BikeMi';
+              layer.bindPopup(`<strong>🚴 BikeMi: ${nombre}</strong><br>Movilidad Activa de Milán (AMAT)`);
+            }
+          }).addTo(map);
+        }).catch(() => {});
+
+      map.invalidateSize();
+    })
+    .catch(err => console.error("Error cargando nil.geojson:", err));
 }
 
 // Datos predeterminados de contingencia sincronizados con el lago gobernado

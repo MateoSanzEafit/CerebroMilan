@@ -23,7 +23,6 @@ body {
   line-height: 1.5;
   min-height: 100vh;
   display: flex;
-  flex-col;
   flex-direction: column;
 }
 
@@ -292,3 +291,81 @@ td {
   margin-top: 0.35rem;
   color: #64748b;
 }
+
+/* --- ESTILOS DEL MAPA TERRITORIAL --- */
+.mapa-contenedor {
+  width: 100%;
+  height: 520px;
+  border-radius: 12px;
+  border: 1px solid var(--borde-suave);
+  margin-top: 1rem;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.panel-territorial {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .panel-territorial {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tarjeta-inspector {
+  background-color: var(--bg-card);
+  border: 1px solid var(--borde-suave);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tarjeta-inspector h3 {
+  font-size: 1.1rem;
+  color: var(--acento-cyan);
+  margin-bottom: 0.5rem;
+}
+
+.inspector-meta {
+  list-style: none;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inspector-meta li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #1c2e4a;
+  padding-bottom: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.inspector-meta span.clave {
+  color: var(--texto-mute);
+}
+
+.inspector-meta span.valor {
+  font-weight: 600;
+  color: #fff;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #0b1320 !important;
+  color: #f8fafc !important;
+  border: 1px solid var(--acento-cyan) !important;
+  border-radius: 8px !important;
+}
+
+.leaflet-popup-tip {
+  background-color: #0b1320 !important;
+}
+

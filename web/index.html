@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -23,6 +24,7 @@
 
   <nav class="nav-modulos">
     <button class="tab-btn activo" onclick="mostrarSeccion('panorama')">Panorama</button>
+    <button class="tab-btn" onclick="mostrarSeccion('territorio')">Territorio (88 NIL)</button>
     <button class="tab-btn" onclick="mostrarSeccion('demografia')">Demografía</button>
     <button class="tab-btn" onclick="mostrarSeccion('seguridad')">Seguridad Vial</button>
     <button class="tab-btn" onclick="mostrarSeccion('ambiente')">Ambiente (2026)</button>
@@ -150,6 +152,41 @@
       </div>
     </section>
 
+    <!-- TERRITORIO (88 NIL) -->
+    <section id="territorio" class="modulo">
+      <div class="cabecera-seccion">
+        <h2>Malla Territorial Oficial · 88 NIL y Movilidad Activa</h2>
+        <p class="lede">Escala dual normativa del <em>Piano di Governo del Territorio (PGT 2030)</em>: los 88 Nuclei di Identità Locale cruzados con las 325 estaciones de BikeMi.</p>
+      </div>
+
+      <div class="panel-territorial">
+        <div>
+          <div id="mapa-milan" class="mapa-contenedor"></div>
+          <p class="nota-dato" style="margin-top: 0.5rem;">Haz clic sobre cualquier polígono para inspeccionar los metadatos oficiales del barrio. Fuente cartográfica: <a href="https://dati.comune.milano.it/dataset/e8e765fc-d882-40b8-95d8-16ff3d39eb7c" target="_blank" style="color:var(--acento-cyan)">ds964 PGT 2030 (IODL 2.0)</a>.</p>
+        </div>
+
+        <div class="tarjeta-inspector">
+          <div>
+            <h3>Inspector Barrial (NIL)</h3>
+            <p id="nil-instruccion" class="nota-dato">Selecciona un barrio en el mapa para ver sus datos normativos y espaciales.</p>
+            <ul class="inspector-meta" id="nil-detalles" style="display:none;">
+              <li><span class="clave">Identificador:</span> <span class="valor" id="nil-id">—</span></li>
+              <li><span class="clave">Nombre NIL:</span> <span class="valor" id="nil-nombre">—</span></li>
+              <li><span class="clave">Superficie:</span> <span class="valor" id="nil-area">—</span></li>
+              <li><span class="clave">Perímetro:</span> <span class="valor" id="nil-perimetro">—</span></li>
+              <li><span class="clave">Normativa:</span> <span class="valor" id="nil-fuente">PGT Milano 2030</span></li>
+              <li><span class="clave">Estado:</span> <span class="valor" style="color:#6ee7b7">Vigente (WGS84)</span></li>
+            </ul>
+          </div>
+          <div style="border-top: 1px solid var(--borde-suave); padding-top: 0.75rem;">
+            <p style="font-size:0.8rem; color:var(--texto-mute);">Capas activas:</p>
+            <span class="tag-estado tag-integrado" style="display:inline-block; margin-top:0.25rem;">88 Polígonos NIL</span>
+            <span class="tag-estado tag-integrado" style="display:inline-block; margin-top:0.25rem;">325 Estaciones BikeMi</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FUENTES Y GOBERNANZA -->
     <section id="fuentes" class="modulo">
       <div class="cabecera-seccion">
@@ -180,6 +217,7 @@
     <p class="pie-sub">Todos los datos proceden de portales abiertos verificados el 2026-09-28. Verificado con 0 fallos de PII.</p>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="app.js"></script>
 </body>
 </html>

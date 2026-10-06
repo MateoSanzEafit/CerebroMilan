@@ -56,5 +56,36 @@ for ruta in archivos:
     hallado = next((v for _, v in pares if isinstance(v, str) and PII.search(v)), None)
     check(f"{rel_path}: ningún texto con correo o teléfono", hallado is None, hallado)
 
+# Comprobaciones de dominio específicas para Milán (exigidas en el taller)
+try:
+    with open(os.path.join(lago_dir, "demografia.json"), "r", encoding="utf-8") as f:
+        fams = json.load(f)["cifras"]["familias_residentes_ultimo_anio"]["valor"]
+    check("Dominio: total de familias en Milán en rango sensato (500k - 900k)", 500_000 <= fams <= 900_000, fams)
+except Exception as e:
+    check("Dominio: lectura demografía para rango", False, str(e))
+
+try:
+    with open(os.path.join(lago_dir, "seguridad.json"), "r", encoding="utf-8") as f:
+        inc = json.load(f)["cifras"]["incidentes_ultimo_anio"]["valor"]
+    check("Dominio: siniestros viales anuales en rango metropolitano (5k - 15k)", 5_000 <= inc <= 15_000, inc)
+except Exception as e:
+    check("Dominio: lectura seguridad para rango", False, str(e))
+
+# Comprobaciones de la malla territorial (88 NIL de Milán)
+nil_geo_path = os.path.join(base_dir, "territorio", "nil.geojson")
+if os.path.exists(nil_geo_path):
+    try:
+        with open(nil_geo_path, "r", encoding="utf-8") as f:
+            nil_data = json.load(f)
+        total_nil = len(nil_data.get("features", []))
+        check("Territorio: malla oficial contiene exactamente los 88 NIL vigentes", total_nil == 88, f"{total_nil} features")
+    except Exception as e:
+        check("Territorio: archivo nil.geojson válido", False, str(e))
+else:
+    check("Territorio: archivo nil.geojson presente", False, "No existe territorio/nil.geojson")
+
+nil_csv_path = os.path.join(base_dir, "territorio", "nil.csv")
+check("Territorio: archivo nil.csv presente en lago", os.path.exists(nil_csv_path), nil_csv_path)
+
 print(f"\nResultado: {fallos} fallos")
 sys.exit(1 if fallos else 0)
