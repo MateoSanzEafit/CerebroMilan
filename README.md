@@ -1,7 +1,7 @@
 # Milán · Sistema Territorial de Información
 
 Grupo: Curaduría: Mateo Santiago Sanz Mejía (Data Steward) · Datos: [Custodia Técnica Milano] · Interfaz: [Desarrollo Web & UX Milano] · Seguridad: [Privacidad & SecOps Milano]  
-Enlace: `https://cerebro-milano.vercel.app` (o despliegue local) · Revisado: 2026-10-06
+Enlace: https://cerebro-milan.vercel.app · Revisado: 2026-10-06
 
 ---
 
