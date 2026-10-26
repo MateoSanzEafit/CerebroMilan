@@ -1,0 +1,20 @@
+# Secretos y variables de entorno
+.env
+.env.*
+!.env.example
+
+# Crudos (NUNCA se versionan ni se despliegan)
+lago/raw/
+*.raw.json
+*.raw.csv
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Node
+node_modules/
+.vercel

@@ -1,0 +1,316 @@
+{
+  "type": "FeatureCollection",
+  "name": "Itinerari e piste ciclabili di Milano",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id_itinerario": "CIC-01",
+        "nome_itinerario": "Dorsale Centro - Buenos Aires - Monza",
+        "municipio": 3,
+        "tipologia": "Pista in sede propria protetta",
+        "lunghezza_m": 5420.5,
+        "fondo": "Asfalto drenante",
+        "anno_realizzazione": 2021
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            9.1915,
+            45.4654
+          ],
+          [
+            9.1978,
+            45.4678
+          ],
+          [
+            9.2052,
+            45.4789
+          ],
+          [
+            9.2155,
+            45.4862
+          ],
+          [
+            9.2214,
+            45.4981
+          ],
+          [
+            9.2285,
+            45.512
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_itinerario": "CIC-02",
+        "nome_itinerario": "Dorsale Castello - Sempione - CityLife",
+        "municipio": 8,
+        "tipologia": "Pista in sede propria",
+        "lunghezza_m": 3850.0,
+        "fondo": "Asfalto",
+        "anno_realizzazione": 2019
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            9.1795,
+            45.4705
+          ],
+          [
+            9.173,
+            45.4725
+          ],
+          [
+            9.167,
+            45.478
+          ],
+          [
+            9.155,
+            45.48
+          ],
+          [
+            9.151,
+            45.476
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_itinerario": "CIC-03",
+        "nome_itinerario": "Ciclovia Lungonaviglio Grande",
+        "municipio": 6,
+        "tipologia": "Percorso ciclo-pedonale protetto",
+        "lunghezza_m": 5100.0,
+        "fondo": "Pavimentato / Asfalto",
+        "anno_realizzazione": 2015
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            9.175,
+            45.452
+          ],
+          [
+            9.168,
+            45.449
+          ],
+          [
+            9.155,
+            45.445
+          ],
+          [
+            9.14,
+            45.441
+          ],
+          [
+            9.12,
+            45.438
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_itinerario": "CIC-04",
+        "nome_itinerario": "Ciclovia Naviglio Pavese - Chiesa Rossa",
+        "municipio": 5,
+        "tipologia": "Percorso promiscuo protetto",
+        "lunghezza_m": 4600.0,
+        "fondo": "Asfalto",
+        "anno_realizzazione": 2018
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            9.178,
+            45.451
+          ],
+          [
+            9.179,
+            45.442
+          ],
+          [
+            9.18,
+            45.431
+          ],
+          [
+            9.181,
+            45.419
+          ],
+          [
+            9.182,
+            45.405
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_itinerario": "CIC-05",
+        "nome_itinerario": "Cerchia dei Bastioni - Ring Ciclabile",
+        "municipio": 1,
+        "tipologia": "Itinerario ciclabile continuo",
+        "lunghezza_m": 8200.0,
+        "fondo": "Asfalto",
+        "anno_realizzazione": 2022
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            9.18,
+            45.454
+          ],
+          [
+            9.195,
+            45.453
+          ],
+          [
+            9.205,
+            45.462
+          ],
+          [
+            9.202,
+            45.474
+          ],
+          [
+            9.188,
+            45.48
+          ],
+          [
+            9.174,
+            45.476
+          ],
+          [
+            9.18,
+            45.454
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_itinerario": "CIC-06",
+        "nome_itinerario": "Raggio Verde Parco Nord - Niguarda",
+        "municipio": 9,
+        "tipologia": "Percorso verde ciclabile",
+        "lunghezza_m": 4950.0,
+        "fondo": "Misto / Asfalto",
+        "anno_realizzazione": 2020
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            9.188,
+            45.484
+          ],
+          [
+            9.189,
+            45.495
+          ],
+          [
+            9.191,
+            45.508
+          ],
+          [
+            9.199,
+            45.522
+          ],
+          [
+            9.208,
+            45.531
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_itinerario": "CIC-07",
+        "nome_itinerario": "Dorsale Porta Romana - Corvetto - Chiaravalle",
+        "municipio": 4,
+        "tipologia": "Corsia ciclabile su carreggiata",
+        "lunghezza_m": 4300.0,
+        "fondo": "Asfalto",
+        "anno_realizzazione": 2021
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            9.202,
+            45.454
+          ],
+          [
+            9.209,
+            45.447
+          ],
+          [
+            9.218,
+            45.439
+          ],
+          [
+            9.231,
+            45.426
+          ],
+          [
+            9.245,
+            45.415
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_itinerario": "CIC-08",
+        "nome_itinerario": "Dorsale Città Studi - Lambrate - Parco Lambro",
+        "municipio": 3,
+        "tipologia": "Corsia ciclabile protetta",
+        "lunghezza_m": 3700.0,
+        "fondo": "Asfalto",
+        "anno_realizzazione": 2023
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            9.215,
+            45.477
+          ],
+          [
+            9.224,
+            45.481
+          ],
+          [
+            9.235,
+            45.487
+          ],
+          [
+            9.245,
+            45.492
+          ]
+        ]
+      }
+    }
+  ]
+}

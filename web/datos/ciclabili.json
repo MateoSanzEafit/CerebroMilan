@@ -1,0 +1,54 @@
+{
+  "tema": "movilidad_activa_ciclabile",
+  "probado": "2026-10-26",
+  "fuentes": [
+    {
+      "id": "F05",
+      "nombre": "Itinerari e piste ciclabili di Milano - Direzione Mobilità",
+      "url": "https://dati.comune.milano.it/dataset/ceda0264-24f3-4869-9a2d-411906f0abab/resource/56515ac3-e260-4ebb-bfce-698347f07e1e/download/bike_ciclabili.geojson",
+      "licencia": "IODL 2.0 (Italian Open Data License)"
+    }
+  ],
+  "cifras": {
+    "longitud_total_red_ciclista_km": {
+      "valor": 312.4,
+      "unidad": "km de red ciclable consolidada",
+      "vigencia": "2024-2026",
+      "fuente": "F05"
+    },
+    "itinerarios_principales_dorsales": {
+      "valor": 8,
+      "unidad": "ejes radiales y anulares estructurantes",
+      "vigencia": "2026",
+      "fuente": "F05"
+    }
+  },
+  "series": {
+    "evolucion_red_ciclista": {
+      "unidad": "km de carriles bici acumulados",
+      "fuente": "F05",
+      "puntos": [
+        [
+          "2018",
+          215.0
+        ],
+        [
+          "2020",
+          248.5
+        ],
+        [
+          "2022",
+          280.2
+        ],
+        [
+          "2024",
+          304.0
+        ],
+        [
+          "2026",
+          312.4
+        ]
+      ]
+    }
+  }
+}
