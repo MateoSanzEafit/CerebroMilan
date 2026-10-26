@@ -1,0 +1,354 @@
+{
+  "type": "FeatureCollection",
+  "name": "Varchi Area B Milano",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-01",
+        "nome_varco": "Viale Monza - Precotto",
+        "municipio": 2,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.2274,
+          45.5115
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-02",
+        "nome_varco": "Via Palmanova - Cascina Gobba",
+        "municipio": 3,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.255,
+          45.508
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-03",
+        "nome_varco": "Via Padova - Crescenzago",
+        "municipio": 2,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.245,
+          45.505
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-04",
+        "nome_varco": "Viale Forlanini - Aeroporto Linate",
+        "municipio": 4,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.271,
+          45.464
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-05",
+        "nome_varco": "Via Mecenate - Rogoredo",
+        "municipio": 4,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.253,
+          45.448
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-06",
+        "nome_varco": "Via Rogoredo - Santa Giulia",
+        "municipio": 4,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.239,
+          45.432
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-07",
+        "nome_varco": "Via Ripamonti - Noverasco",
+        "municipio": 5,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.208,
+          45.412
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-08",
+        "nome_varco": "Via Chiesa Rossa - Gratosoglio",
+        "municipio": 5,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.182,
+          45.405
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-09",
+        "nome_varco": "Via Missaglia - Ronchetto delle Rane",
+        "municipio": 5,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.177,
+          45.408
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-10",
+        "nome_varco": "Via Lorenteggio - Corsico",
+        "municipio": 6,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.124,
+          45.441
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-11",
+        "nome_varco": "Via Bisceglie - Baggio",
+        "municipio": 7,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.112,
+          45.452
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-12",
+        "nome_varco": "Via Novara - San Siro Ovest",
+        "municipio": 7,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.098,
+          45.472
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-13",
+        "nome_varco": "Viale Certosa - Musocco",
+        "municipio": 8,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.126,
+          45.503
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-14",
+        "nome_varco": "Via Gallarate - Cascina Merlata",
+        "municipio": 8,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.108,
+          45.51
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-15",
+        "nome_varco": "Via Comasina - Cormano",
+        "municipio": 9,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.162,
+          45.531
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-16",
+        "nome_varco": "Via Fermi - Bruzzano",
+        "municipio": 9,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.176,
+          45.526
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-17",
+        "nome_varco": "Viale Fulvio Testi - Sesto San Giovanni",
+        "municipio": 9,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.215,
+          45.528
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_varco": "VAR-18",
+        "nome_varco": "Via Rubattino - Tangenziale Est",
+        "municipio": 3,
+        "tipo_varco": "Telecamera fissa OCR / Infrarosso",
+        "stato": "Attivo - Monitoraggio continuo",
+        "zona": "Area B (ZTL Ambientale)",
+        "orario_attivazione": "Lun-Ven 07:30 - 19:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.259,
+          45.481
+        ]
+      }
+    }
+  ]
+}

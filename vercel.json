@@ -1,3 +1,14 @@
 {
-  "outputDirectory": "web"
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/web",
+      "destination": "/web/index.html"
+    }
+  ]
 }

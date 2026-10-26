@@ -1,0 +1,75 @@
+{
+  "tema": "seguridad",
+  "probado": "2026-09-28",
+  "fuentes": [
+    {
+      "id": "comune_milano_incidenti",
+      "nombre": "Comune di Milano - Incidenti stradali per zona (ds177)",
+      "url": "https://dati.comune.milano.it/dataset/9f7bcc9c-20a4-4e48-a7cd-99b15ed11102/resource/38d2171d-1067-4252-9f96-02867a2cc617/download/ds177_trafficotrasporti_incidenti_stradali.json",
+      "estado": "vivo",
+      "licencia": "IODL 2.0 (Italian Open Data License / CC BY)"
+    }
+  ],
+  "cifras": {
+    "incidentes_ultimo_anio": {
+      "valor": 7602,
+      "unidad": "siniestros viales registrados",
+      "vigencia": "2024",
+      "fuente": "comune_milano_incidenti"
+    },
+    "lesionados_ultimo_anio": {
+      "valor": 9384,
+      "unidad": "personas lesionadas en siniestros",
+      "vigencia": "2024",
+      "fuente": "comune_milano_incidenti"
+    }
+  },
+  "series": {
+    "evolucion_anual": {
+      "unidad": "siniestros viales",
+      "fuente": "comune_milano_incidenti",
+      "puntos": [
+        [
+          "2015",
+          8627
+        ],
+        [
+          "2016",
+          8770
+        ],
+        [
+          "2017",
+          8297
+        ],
+        [
+          "2018",
+          8254
+        ],
+        [
+          "2019",
+          8118
+        ],
+        [
+          "2020",
+          5254
+        ],
+        [
+          "2021",
+          7286
+        ],
+        [
+          "2022",
+          7606
+        ],
+        [
+          "2023",
+          7558
+        ],
+        [
+          "2024",
+          7602
+        ]
+      ]
+    }
+  }
+}

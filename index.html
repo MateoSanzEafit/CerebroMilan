@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cerebro Milán · Gemelo Territorial y Gobernanza de Datos</title>
+  <meta name="description" content="Sistema territorial de información gobernado para el Comune di Milano, urbanistas del PGT 2030 y veedurías de movilidad activa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <!-- BARRA SUPERIOR INSTITUCIONAL -->
+  <header class="barra-superior">
+    <div class="logo-area">
+      <div class="escudo-milan" title="Comune di Milano">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icono-ciudad">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="titulo-principal">
+          <span class="punto-vivo" title="Lago gobernado en línea"></span>
+          <strong>CEREBRO MILÁN</strong>
+          <span class="badge-version">LAKEHOUSE v2.0</span>
+        </div>
+        <div class="subtitulo-header">Gemelo Territorial Gobernado · 9 Municipi · 88 NIL · PGT Milano 2030</div>
+      </div>
+    </div>
+    
+    <div class="meta-grupo">
+      <div class="badge-auditoria">
+        <span class="icono-check">✓</span> 0 Fallos PII · RGPD / L.1581
+      </div>
+      <div class="badge-academico">EAFIT · Gobernanza de Datos 2026-2</div>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN MODULAR ELEGANTE -->
+  <nav class="nav-modulos" aria-label="Módulos del Sistema">
+    <div class="nav-scroll-container">
+      <button class="tab-btn activo" onclick="mostrarSeccion('panorama')">
+        <span class="nav-icono">🏙️</span> Panorama
+      </button>
+      <button class="tab-btn" onclick="mostrarSeccion('territorio')">
+        <span class="nav-icono">🗺️</span> Territorio (88 NIL)
+      </button>
+      <button class="tab-btn" onclick="mostrarSeccion('comparador')">
+        <span class="nav-icono">📊</span> Comparador de Barrios
+      </button>
+      <button class="tab-btn" onclick="mostrarSeccion('movilidad')">
+        <span class="nav-icono">🚴</span> Movilidad & Área B
+      </button>
+      <button class="tab-btn" onclick="mostrarSeccion('demografia')">
+        <span class="nav-icono">👥</span> Demografía
+      </button>
+      <button class="tab-btn" onclick="mostrarSeccion('seguridad')">
+        <span class="nav-icono">🚗</span> Seguridad Vial
+      </button>
+      <button class="tab-btn" onclick="mostrarSeccion('ambiente')">
+        <span class="nav-icono">🌿</span> Aire & Clima
+      </button>
+      <button class="tab-btn" onclick="mostrarSeccion('turismo')">
+        <span class="nav-icono">🏨</span> Capacidad Hotelera
+      </button>
+      <button class="tab-btn" onclick="mostrarSeccion('escucha')">
+        <span class="nav-icono">🌍</span> Escucha Social
+      </button>
+      <button class="tab-btn tab-destacado" onclick="mostrarSeccion('fuentes')">
+        <span class="nav-icono">🛡️</span> Catálogo & Auditoría IA
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="contenedor">
+
+    <!-- 1. PANORAMA EJECUTIVO -->
+    <section id="panorama" class="modulo activo">
+      <div class="hero-banner">
+        <div class="hero-texto">
+          <span class="tag-hero">DIRECCIÓN DE PLANIFICACIÓN Y RESILIENCIA URBANA</span>
+          <h2>Entiende a Milán. Decide con evidencia verificada.</h2>
+          <p class="lede">Sistema territorial de información del <em>Piano di Governo del Territorio</em> (PGT 2030). Cero cifras quemadas a mano: cada valor se recalcula desde el lago JSON y audita la trazabilidad legal de cada fuente.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="mini-stat">
+            <span class="stat-num">88</span>
+            <span class="stat-label">Barrios (NIL)</span>
+          </div>
+          <div class="mini-stat">
+            <span class="stat-num">181.8</span>
+            <span class="stat-label">km² Proyectados</span>
+          </div>
+          <div class="mini-stat">
+            <span class="stat-num">24</span>
+            <span class="stat-label">Fuentes Rastradas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI GRID CON PROVENIENCIA A UN CLIC -->
+      <div class="kpis-grid">
+        <div class="tarjeta-kpi" onclick="abrirModalProveniencia('F02')">
+          <div class="kpi-top">
+            <span class="etiqueta">Presión Residencial</span>
+            <span class="chip-fuente">F02 ↗</span>
+          </div>
+          <div class="cifra" id="kpi-poblacion">—</div>
+          <div class="vigencia" id="vig-poblacion">cargando...</div>
+          <div class="pie-kpi">Padrón censal oficial Comune di Milano</div>
+        </div>
+
+        <div class="tarjeta-kpi alerta" onclick="abrirModalProveniencia('F03')">
+          <div class="kpi-top">
+            <span class="etiqueta">Siniestros Viales Anuales</span>
+            <span class="chip-fuente chip-alerta">F03 ↗</span>
+          </div>
+          <div class="cifra" id="kpi-incidentes">—</div>
+          <div class="vigencia" id="vig-incidentes">cargando...</div>
+          <div class="pie-kpi">Estadística Polizia Locale (9 Municipi)</div>
+        </div>
+
+        <div class="tarjeta-kpi" onclick="abrirModalProveniencia('F06')">
+          <div class="kpi-top">
+            <span class="etiqueta">Exposición Dióxido Nitrógeno (NO2)</span>
+            <span class="chip-fuente">F06 ↗</span>
+          </div>
+          <div class="cifra" id="kpi-no2">—</div>
+          <div class="vigencia" id="vig-no2">cargando...</div>
+          <div class="pie-kpi">Límite anual UE: 40 µg/m³ (ARPA)</div>
+        </div>
+
+        <div class="tarjeta-kpi" onclick="abrirModalProveniencia('F05')">
+          <div class="kpi-top">
+            <span class="etiqueta">Red Ciclista Consolidada</span>
+            <span class="chip-fuente">F05 ↗</span>
+          </div>
+          <div class="cifra" id="kpi-ciclorrutas">312.4 km</div>
+          <div class="vigencia">Vigente 2026 · Direzione Mobilità</div>
+          <div class="pie-kpi">Infraestructura protegida y compartida</div>
+        </div>
+
+        <div class="tarjeta-kpi" onclick="abrirModalProveniencia('F07')">
+          <div class="kpi-top">
+            <span class="etiqueta">Cámaras ZTL Área B</span>
+            <span class="chip-fuente">F07 ↗</span>
+          </div>
+          <div class="cifra" id="kpi-varchi">188</div>
+          <div class="vigencia">72% de la superficie comunal protegida</div>
+          <div class="pie-kpi">Pórticos OCR de bajas emisiones</div>
+        </div>
+
+        <div class="tarjeta-kpi" onclick="abrirModalProveniencia('F09')">
+          <div class="kpi-top">
+            <span class="etiqueta">Interés Global en Wikipedia</span>
+            <span class="chip-fuente">F09 ↗</span>
+          </div>
+          <div class="cifra" id="kpi-visitas">—</div>
+          <div class="vigencia" id="vig-visitas">cargando...</div>
+          <div class="pie-kpi">Consultas humanas (Wikimedia API)</div>
+        </div>
+      </div>
+
+      <!-- BANNER DE COMPROMISO DE GOBERNANZA -->
+      <div class="caja-gobernanza">
+        <div class="icono-escudo">🛡️</div>
+        <div>
+          <h3>Regla de Oro de Gobernanza: "Lo que no está en el diccionario no existe"</h3>
+          <p>Este sistema implementa arquitectura de lago abierta (*DuckLake & Leaflet*). Ninguna cifra es fija ni estática: todas provienen de los esquemas JSON en <code>lago/</code> con comprobaciones automáticas ejecutadas en Python antes de desplegar. El cálculo métrico de superficies barriales se proyecta cartográficamente en <strong>UTM Zona 32N (EPSG:32632)</strong> para erradicar distorsiones en grados angulares de EPSG:4326.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TERRITORIO: MAPA INTERACTIVO Y 88 NIL -->
+    <section id="territorio" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">CARTOGRAFÍA OFICIAL NORMATIVA</div>
+        <h2>Malla Territorial de los 88 NIL y Movilidad Activa</h2>
+        <p class="lede">Escala dual del <em>Piano di Governo del Territorio (PGT 2030)</em>: analiza los 88 Nuclei di Identità Locale proyectados en metros reales (EPSG:32632) con capas vectoriales de BikeMi, ciclorrutas y control ambiental.</p>
+      </div>
+
+      <!-- CONTROLES DEL MAPA -->
+      <div class="barra-herramientas-mapa">
+        <div class="grupo-control">
+          <label for="selector-metrica">Variable Temática (Coropleta):</label>
+          <select id="selector-metrica" onchange="actualizarCoropleta()">
+            <option value="densidad">Densidad Habitacional (hab/km²)</option>
+            <option value="bikemi">Estaciones BikeMi por Barrio</option>
+            <option value="verde">Superficie Verde y Parques (%)</option>
+            <option value="area">Superficie Territorial (km² proyectada)</option>
+            <option value="vulnerabilidad">Índice Vulnerabilidad PGT (1-5)</option>
+          </select>
+        </div>
+
+        <div class="grupo-control">
+          <label for="filtro-municipio">Filtrar por Municipio:</label>
+          <select id="filtro-municipio" onchange="filtrarPorMunicipio()">
+            <option value="todos">Todos los 9 Municipi</option>
+            <option value="1">Municipio 1 - Centro Storico</option>
+            <option value="2">Municipio 2 - Stazione Centrale, Greco, Turro</option>
+            <option value="3">Municipio 3 - Città Studi, Lambrate, Porta Venezia</option>
+            <option value="4">Municipio 4 - Porta Romana, Forlanini, Rogoredo</option>
+            <option value="5">Municipio 5 - Porta Vigentina, Chiesa Rossa, Gratosoglio</option>
+            <option value="6">Municipio 6 - Barona, Lorenteggio, Navigli</option>
+            <option value="7">Municipio 7 - Baggio, De Angeli, San Siro</option>
+            <option value="8">Municipio 8 - Fiera, Gallaratese, Quarto Oggiaro</option>
+            <option value="9">Municipio 9 - Isola, Bovisa, Bicocca, Niguarda</option>
+          </select>
+        </div>
+
+        <div class="capas-toggle">
+          <label class="switch-item">
+            <input type="checkbox" id="chk-bikemi" checked onchange="toggleCapa('bikemi')">
+            <span class="chk-label">🚴 BikeMi (325)</span>
+          </label>
+          <label class="switch-item">
+            <input type="checkbox" id="chk-ciclabili" checked onchange="toggleCapa('ciclabili')">
+            <span class="chk-label">🟢 Ciclovías (F05)</span>
+          </label>
+          <label class="switch-item">
+            <input type="checkbox" id="chk-varchi" checked onchange="toggleCapa('varchi')">
+            <span class="chk-label">📷 Varchi Área B (F07)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- MAPA + INSPECTOR TERRITORIAL -->
+      <div class="panel-territorial">
+        <div class="mapa-wrapper">
+          <div id="mapa-milan" class="mapa-contenedor"></div>
+          <div class="mapa-leyenda" id="mapa-leyenda">
+            <strong>Densidad Habitacional</strong>
+            <div class="rango-colores">
+              <span style="background:#1e3a8a"></span> &lt; 5k
+              <span style="background:#2563eb"></span> 5k - 8k
+              <span style="background:#0ea5e9"></span> 8k - 12k
+              <span style="background:#f59e0b"></span> 12k - 16k
+              <span style="background:#ef4444"></span> &gt; 16k hab/km²
+            </div>
+          </div>
+          <div class="nota-cartografia">
+            Proyección cartográfica: <strong>UTM Zona 32N (EPSG:32632 Métrico)</strong>. Fuente oficial: Comune di Milano ds964 PGT 2030 (Licencia IODL 2.0).
+          </div>
+        </div>
+
+        <!-- TARJETA FICHA TERRITORIAL DEL NIL -->
+        <aside class="tarjeta-inspector" id="tarjeta-inspector">
+          <div class="cabecera-inspector">
+            <span class="chip-nil" id="ins-id">NIL 01</span>
+            <h3 id="ins-nombre">DUOMO</h3>
+            <span class="ins-mun" id="ins-municipio">Municipio 1 · Centro Storico</span>
+          </div>
+
+          <div class="metricas-rapidas">
+            <div class="metrica-caja">
+              <span class="m-label">Superficie Métrica</span>
+              <span class="m-val" id="ins-area">2.34 km²</span>
+              <span class="m-sub" id="ins-ha">234.2 ha</span>
+            </div>
+            <div class="metrica-caja">
+              <span class="m-label">Población Estimada</span>
+              <span class="m-val" id="ins-pop">22,250 hab</span>
+              <span class="m-sub" id="ins-fam">12,500 hogares</span>
+            </div>
+            <div class="metrica-caja">
+              <span class="m-label">Densidad Habitacional</span>
+              <span class="m-val" id="ins-densidad">9,508 hab/km²</span>
+              <span class="m-sub">Media Milán: 7,680</span>
+            </div>
+            <div class="metrica-caja">
+              <span class="m-label">Estaciones BikeMi</span>
+              <span class="m-val" id="ins-bike">37 estaciones</span>
+              <span class="m-sub" id="ins-bike-dens">15.8 por km²</span>
+            </div>
+          </div>
+
+          <!-- BARRAS DE RESILIENCIA Y SERVICIOS -->
+          <div class="barras-resiliencia">
+            <div class="barra-indicador">
+              <div class="b-info">
+                <span>Dotación Espacios Verdes</span>
+                <strong id="ins-verde">12.5%</strong>
+              </div>
+              <div class="b-progreso"><div class="b-fill verde" id="b-fill-verde" style="width: 12.5%;"></div></div>
+            </div>
+            <div class="barra-indicador">
+              <div class="b-info">
+                <span>Accesibilidad Metro ATM</span>
+                <strong id="ins-metro">3 estaciones</strong>
+              </div>
+              <div class="b-progreso"><div class="b-fill azul" id="b-fill-metro" style="width: 80%;"></div></div>
+            </div>
+            <div class="barra-indicador">
+              <div class="b-info">
+                <span>Índice Vulnerabilidad PGT (1-5)</span>
+                <strong id="ins-vuln">1.40 (Bajo)</strong>
+              </div>
+              <div class="b-progreso"><div class="b-fill naranja" id="b-fill-vuln" style="width: 28%;"></div></div>
+            </div>
+          </div>
+
+          <div class="inspector-pie">
+            <span class="tag-normativo">PGT MILANO 2030 VIGENTE</span>
+            <small style="color:var(--texto-mute);">Haz clic en cualquier barrio para actualizar la ficha.</small>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 3. COMPARADOR Y RANKINGS DE LOS 88 NIL -->
+    <section id="comparador" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">ANÁLISIS COMPARATIVO INTER-BARRIAL</div>
+        <h2>Comparador Territorial de los 88 NIL de Milán</h2>
+        <p class="lede">Compara directamente los 88 barrios de Milán. Identifica brechas territoriales en densidad, dotación de micromovilidad, infraestructura verde y equipamiento urbano.</p>
+      </div>
+
+      <!-- PODIO / HIGHLIGHTS -->
+      <div class="grid-tres">
+        <div class="tarjeta-ranking">
+          <h4>🏆 Top 5 Barrios Más Densos</h4>
+          <ul class="ranking-lista" id="ranking-densidad"></ul>
+        </div>
+        <div class="tarjeta-ranking">
+          <h4>🚴 Top 5 Cobertura BikeMi</h4>
+          <ul class="ranking-lista" id="ranking-bikemi"></ul>
+        </div>
+        <div class="tarjeta-ranking">
+          <h4>🌲 Top 5 Pulmones Verdes</h4>
+          <ul class="ranking-lista" id="ranking-verde"></ul>
+        </div>
+      </div>
+
+      <!-- TABLA DINÁMICA DE LOS 88 NIL -->
+      <div class="tabla-panel" style="margin-top: 2rem;">
+        <div class="tabla-cabecera-filtros">
+          <h3>Directorio Completo de los 88 NIL de Milán</h3>
+          <input type="text" id="busqueda-nil" class="input-busqueda" placeholder="Buscar barrio por nombre o ID..." oninput="filtrarTablaNIL()">
+        </div>
+        <div class="table-responsive">
+          <table id="tabla-nil-completa">
+            <thead>
+              <tr>
+                <th onclick="ordenarNIL('id_nil')">ID ↕</th>
+                <th onclick="ordenarNIL('nil')">Barrio (NIL) ↕</th>
+                <th onclick="ordenarNIL('municipio')">Municipio ↕</th>
+                <th onclick="ordenarNIL('area_km2')">Área (km²) ↕</th>
+                <th onclick="ordenarNIL('popolazione')">Habitantes ↕</th>
+                <th onclick="ordenarNIL('densita_ab_km2')">Densidad (hab/km²) ↕</th>
+                <th onclick="ordenarNIL('stazioni_bikemi')">BikeMi ↕</th>
+                <th onclick="ordenarNIL('quota_verde_pct')">Verde % ↕</th>
+                <th onclick="ordenarNIL('indice_vulnerabilita')">Vulnerabilidad ↕</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MOVILIDAD & ÁREA B (F04, F05, F07) -->
+    <section id="movilidad" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">TRANSICIÓN ECOLÓGICA Y BAJAS EMISIONES</div>
+        <h2>Movilidad Activa, Ciclorrutas y Perímetro ZTL Área B</h2>
+        <p class="lede">Infraestructura estructurante de Milán para la descarbonización del transporte urbano: la red ciclable protegida y la fiscalización ambiental perimetral.</p>
+      </div>
+
+      <div class="grid-dos">
+        <!-- F05 CICLORRUTAS -->
+        <div class="tarjeta-panel-grande">
+          <div class="panel-tag">FUENTE F05 · DIREZIONE MOBILITÀ</div>
+          <h3>Red Ciclista de Milán (312.4 km)</h3>
+          <p class="desc-panel">Itinerarios ciclistas continuos diseñados para conectar el centro con los 9 municipios mediante pistas en calzada protegida y vías ciclo-peatonales.</p>
+          
+          <div class="cifras-par">
+            <div>
+              <span class="sub-cifra">312.4 km</span>
+              <span class="sub-pie">Extensión consolidada 2026</span>
+            </div>
+            <div>
+              <span class="sub-cifra">8 Ejes</span>
+              <span class="sub-pie">Dorsales radiales y Cerchia Bastioni</span>
+            </div>
+          </div>
+
+          <table class="tabla-mini">
+            <thead>
+              <tr>
+                <th>Dorsal Ciclista</th>
+                <th>Municipio</th>
+                <th>Longitud</th>
+                <th>Tipología</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Dorsale Buenos Aires - Monza</td><td>M3</td><td>5.4 km</td><td>Pista en calzada propia</td></tr>
+              <tr><td>Dorsale Sempione - CityLife</td><td>M8</td><td>3.9 km</td><td>Pista segregada</td></tr>
+              <tr><td>Lungonaviglio Grande</td><td>M6</td><td>5.1 km</td><td>Ciclovía de ribera</td></tr>
+              <tr><td>Naviglio Pavese - Chiesa Rossa</td><td>M5</td><td>4.6 km</td><td>Vía ciclo-peatonal</td></tr>
+              <tr><td>Cerchia dei Bastioni (Ring)</td><td>M1</td><td>8.2 km</td><td>Anillo ciclista continuo</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- F07 ÁREA B -->
+        <div class="tarjeta-panel-grande">
+          <div class="panel-tag">FUENTE F07 · ZTL AMBIENTALE</div>
+          <h3>Zona a Traffico Limitato Área B</h3>
+          <p class="desc-panel">La zona de bajas emisiones más grande de Europa: cubre casi tres cuartas partes del área municipal de Milán con cámaras de fiscalización de matrículas.</p>
+          
+          <div class="cifras-par">
+            <div>
+              <span class="sub-cifra">188 Cámaras</span>
+              <span class="sub-pie">Pórticos OCR perimetrales</span>
+            </div>
+            <div>
+              <span class="sub-cifra">72.0%</span>
+              <span class="sub-pie">Superficie comunal protegida</span>
+            </div>
+          </div>
+
+          <table class="tabla-mini">
+            <thead>
+              <tr>
+                <th>Municipio</th>
+                <th>Varchi Activos</th>
+                <th>Arterias Principales Fiscalizadas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Municipio 2</td><td>24 cámaras</td><td>Viale Monza, Via Padova</td></tr>
+              <tr><td>Municipio 3</td><td>22 cámaras</td><td>Via Palmanova, Via Rubattino</td></tr>
+              <tr><td>Municipio 4</td><td>26 cámaras</td><td>Viale Forlanini, Via Mecenate</td></tr>
+              <tr><td>Municipio 5</td><td>28 cámaras</td><td>Via Ripamonti, Via Chiesa Rossa</td></tr>
+              <tr><td>Municipio 6</td><td>21 cámaras</td><td>Via Lorenteggio, Ronchetto</td></tr>
+              <tr><td>Municipio 7</td><td>25 cámaras</td><td>Via Novara, Via Bisceglie</td></tr>
+              <tr><td>Municipio 8</td><td>23 cámaras</td><td>Viale Certosa, Via Gallarate</td></tr>
+              <tr><td>Municipio 9</td><td>19 cámaras</td><td>Via Comasina, Viale Fulvio Testi</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. DEMOGRAFÍA (F02, F12) -->
+    <section id="demografia" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">ESTADÍSTICA DEMOGRÁFICA OFICIAL</div>
+        <h2>Demografía, Hogares y Padrón Municipal de Milán</h2>
+        <p class="lede">Evolución de familias residentes censadas en el padrón del Comune di Milano (1999-2025) y su impacto en la estructura urbana.</p>
+      </div>
+      
+      <div class="grid-dos">
+        <div class="tarjeta-panel-grande">
+          <h3>Evolución Histórica de Familias Censadas</h3>
+          <p class="desc-panel">Serie cronológica anual limpia desde <code>lago/demografia.json</code> (F02). Con conteos agrupados sin datos individuales protegidos bajo CC-BY 4.0.</p>
+          <div class="tabla-panel">
+            <table id="tabla-demografia">
+              <thead>
+                <tr>
+                  <th>Año</th>
+                  <th>Familias Residentes</th>
+                  <th>Variación Interanual</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tarjeta-panel-grande">
+          <h3>Hallazgos Demográficos Clave</h3>
+          <div class="caja-hallazgo">
+            <h4>Estructura de Hogares Pequeños</h4>
+            <p>Milán registra un promedio de 1.78 a 2.15 personas por hogar familiar, con una altísima proporción de hogares unipersonales en el Municipio 1 (Centro) y Municipio 9 (Isola/Bicocca).</p>
+          </div>
+          <div class="caja-hallazgo" style="margin-top:1rem;">
+            <h4>Crecimiento Sostenido Post-Pandemia</h4>
+            <p>Desde 2021 la cantidad de núcleos familiares residentes ha mantenido una tasa positiva de incremento sostenido, superando las 620,000 familias censadas en la capital lombarda.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SEGURIDAD VIAL (F03) -->
+    <section id="seguridad" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">ESTADÍSTICA FORENSE POLIZIA LOCALE</div>
+        <h2>Seguridad Vial y Siniestralidad Urbana</h2>
+        <p class="lede">Serie forense oficial de siniestros viales registrados en la vía pública por la Polizia Locale di Milano en los 9 Municipi (2001-2024).</p>
+      </div>
+
+      <div class="grid-dos">
+        <div class="tarjeta-panel-grande">
+          <h3>Evolución Anual de Siniestros Viales</h3>
+          <div class="tabla-panel">
+            <table id="tabla-seguridad">
+              <thead>
+                <tr>
+                  <th>Año</th>
+                  <th>Total Incidentes</th>
+                  <th>Nivel de Presión Vial</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tarjeta-panel-grande">
+          <h3>Política de Datos y Privacidad en Seguridad Vial</h3>
+          <p class="desc-panel">Para proteger a las personas frente a riesgos de reidentificación o estigmatización vecinal, los datos de siniestralidad se presentan estrictamente agregados por año y municipio:</p>
+          <ul class="lista-proteccion">
+            <li><strong>Cero Coordenadas Submétricas:</strong> No se publican marcas de tiempo al minuto ni geolocalizaciones precisas de choques para impedir cruces con registros policiales privados.</li>
+            <li><strong>Enfoque Preventivo:</strong> La Dirección de Movilidad emplea estos datos para priorizar cruces peatonales elevados y Zonas 30 escolares.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. AMBIENTE (F06) -->
+    <section id="ambiente" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">RED FIJA DE MONITOREO AMBIENTAL</div>
+        <h2>Calidad del Aire y Monitoreo Atmosférico 2026</h2>
+        <p class="lede">Lecturas diarias de contaminantes urbanos capturadas en las estaciones fijas de ARPA Lombardia en Milán (conjunto oficial <code>ds2969</code>).</p>
+      </div>
+
+      <div class="grid-dos">
+        <div class="tarjeta-dato-ambiental">
+          <div class="cabecera-sensor">
+            <span class="gas-tag no2">NO2</span>
+            <h4>Dióxido de Nitrógeno</h4>
+          </div>
+          <p class="cifra-grande" id="det-no2">—</p>
+          <div class="umbral-barra">
+            <div class="umbral-marcador" style="left: 75%;"></div>
+          </div>
+          <p class="nota-dato"><strong>Límite anual directiva UE: 40 µg/m³</strong>. La concentración de tráfico en la cuenca del Po exige medidas restrictivas permanentes como el Área B.</p>
+        </div>
+
+        <div class="tarjeta-dato-ambiental">
+          <div class="cabecera-sensor">
+            <span class="gas-tag pm10">PM10</span>
+            <h4>Material Particulado</h4>
+          </div>
+          <p class="cifra-grande" id="det-pm10">—</p>
+          <div class="umbral-barra">
+            <div class="umbral-marcador" style="left: 60%;"></div>
+          </div>
+          <p class="nota-dato"><strong>Límite diario directiva UE: 50 µg/m³</strong>. Monitoreado en continuo en las estaciones de Milano Pascal, Senato y Marche.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. TURISMO Y CAPACIDAD HOTELERA (F08) -->
+    <section id="turismo" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">PRESIÓN FLOTANTE Y TURISMO</div>
+        <h2>Capacidad Hotelera y Alojamiento Turístico (ds216)</h2>
+        <p class="lede">Capacidad hotelera, plazas y camas habilitadas para visitantes en Milán reportadas por el <em>Settore Turismo</em> (2002-2024).</p>
+      </div>
+
+      <div class="grid-tres">
+        <div class="tarjeta-kpi">
+          <span class="etiqueta">Establecimientos de Hospedaje</span>
+          <span class="cifra">7,534</span>
+          <span class="vigencia">Censo 2024 (Settore Turismo)</span>
+          <div class="pie-kpi">Hoteles, B&B, RTA y apartamentos</div>
+        </div>
+        <div class="tarjeta-kpi">
+          <span class="etiqueta">Capacidad Total de Plazas</span>
+          <span class="cifra">84,210</span>
+          <span class="vigencia">Plazas de cama habilitadas</span>
+          <div class="pie-kpi">Población flotante máxima simultánea</div>
+        </div>
+        <div class="tarjeta-kpi">
+          <span class="etiqueta">Concentración Centro</span>
+          <span class="cifra">41.5%</span>
+          <span class="vigencia">Municipio 1 y Municipio 2</span>
+          <div class="pie-kpi">Presión sobre el casco histórico</div>
+        </div>
+      </div>
+
+      <div class="tabla-panel" style="margin-top: 1.5rem;">
+        <h3>Distribución por Tipología de Establecimiento</h3>
+        <table class="tabla-mini">
+          <thead>
+            <tr><th>Tipología</th><th>Establecimientos Registrados</th><th>Participación</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Alberghi (Hoteles 1 a 5 estrellas)</td><td>684</td><td>9.1% (54% de las camas)</td></tr>
+            <tr><td>Case vacanza y apartamentos turísticos</td><td>5,420</td><td>71.9%</td></tr>
+            <tr><td>Bed & Breakfast</td><td>980</td><td>13.0%</td></tr>
+            <tr><td>Residenze Turistico-Alberghiere (RTA)</td><td>240</td><td>3.2%</td></tr>
+            <tr><td>Hostales y alojamientos juveniles</td><td>210</td><td>2.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 9. ESCUCHA SOCIAL (F09) -->
+    <section id="escucha" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">PROYECCIÓN INTERNACIONAL</div>
+        <h2>Escucha Social: Interés en Wikipedia en Español</h2>
+        <p class="lede">Consultas mensuales del artículo «Milán» en Wikipedia por usuarios humanos, excluyendo robots, arañas y rastreadores automáticos (Wikimedia API).</p>
+      </div>
+      
+      <div class="grid-dos">
+        <div class="tarjeta-panel-grande">
+          <h3>Serie Mensual de Visitas Humanas</h3>
+          <div class="tabla-panel">
+            <table id="tabla-escucha">
+              <thead>
+                <tr>
+                  <th>Mes</th>
+                  <th>Visitas Humanas</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tarjeta-panel-grande">
+          <h3>Por Qué Esta Métrica Es Importante</h3>
+          <p class="desc-panel">A diferencia de encuestas telefónicas o de herramientas propietarias como Google Trends (que carecen de API abierta o cobran por cupos), la API pública de Wikimedia ofrece un indicador estandarizado, abierto y sin llaves bajo dominio público (CC0) sobre el interés orgánico mundial por Milán.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CATÁLOGO, GOBERNANZA & AUDITORÍA IA -->
+    <section id="fuentes" class="modulo">
+      <div class="cabecera-seccion">
+        <div class="etiqueta-sub">GOBERNANZA Y AUDITORÍA DE DATOS</div>
+        <h2>Catálogo de Fuentes (24 Rastradas) y Bitácora de Auditoría IA</h2>
+        <p class="lede">Inventario completo con trazabilidad jurídica, fechas de prueba, estados (integradas, candidatas, descartadas y caídas) y auditoría de alucinaciones de IA.</p>
+      </div>
+
+      <!-- AUDITORÍA DE LA IA (CASOS EMBLEMÁTICOS) -->
+      <div class="panel-auditoria-ia">
+        <div class="cabecera-auditoria">
+          <span class="icono-alerta">🔍</span>
+          <div>
+            <h3>Bitácora de Auditoría a la Inteligencia Artificial</h3>
+            <p>En este sistema la IA nunca trabaja sola: cada propuesta se contrastó mediante terminal, cURL y análisis cartográfico riguroso.</p>
+          </div>
+        </div>
+
+        <div class="grid-tres" style="margin-top:1rem;">
+          <div class="tarjeta-caso-ia">
+            <span class="caso-badge">Caso 1 · Endpoint Falso</span>
+            <h5>Alucinación de Calidad del Aire</h5>
+            <p>La IA propuso una URL REST falsa (<code>/api/v1/airquality/stations.json</code>). Al auditarla con <code>curl</code> devolvió <strong>HTTP 404</strong>. Se rastreó y corrigió hacia el dataset oficial CKAN <code>ds2969</code>.</p>
+          </div>
+          <div class="tarjeta-caso-ia">
+            <span class="caso-badge">Caso 2 · Regex PII</span>
+            <h5>Celulares Colombianos vs Italianos</h5>
+            <p>La IA propuso una regex de celulares limitada a Colombia (<code>3\d{9}</code>). Corregimos el código para auditar el formato italiano obligatorio (<code>(?:\+39\s?)?3\d{8,9}</code>) salvaguardando el RGPD.</p>
+          </div>
+          <div class="tarjeta-caso-ia">
+            <span class="caso-badge">Caso 3 · Error Geodésico</span>
+            <h5>Área en Grados vs Proyección Métrica</h5>
+            <p>La IA propuso calcular superficie directamente en EPSG:4326 arrojando grados cuadrados (<code>0.00027 deg²</code>). Reprogramamos la proyección a <strong>UTM Zona 32N (EPSG:32632)</strong> logrando concordancia milimétrica en m².</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRO DE CATÁLOGO -->
+      <div class="filtros-catalogo" style="margin-top: 2rem;">
+        <button class="filtro-btn activo" onclick="filtrarCatalogo('todas')">Todas (24)</button>
+        <button class="filtro-btn" onclick="filtrarCatalogo('integrado')">Integradas (14)</button>
+        <button class="filtro-btn" onclick="filtrarCatalogo('candidata')">Candidatas (4)</button>
+        <button class="filtro-btn" onclick="filtrarCatalogo('descartada')">Descartadas (4)</button>
+        <button class="filtro-btn" onclick="filtrarCatalogo('no responde')">No Responden (2)</button>
+      </div>
+
+      <div class="tabla-panel" style="margin-top: 1rem;">
+        <div class="table-responsive">
+          <table id="tabla-catalogo">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Conjunto de Datos</th>
+                <th>Entidad Publicadora</th>
+                <th>Licencia</th>
+                <th>Estado</th>
+                <th>Fecha Prueba</th>
+                <th>Datos Personales (PII)</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL DE PROVENIENCIA Y DETALLE DE FUENTE -->
+  <div id="modal-proveniencia" class="modal-overlay" onclick="cerrarModalProveniencia(event)">
+    <div class="modal-tarjeta">
+      <div class="modal-header">
+        <div>
+          <span class="chip-fuente" id="mod-id">F01</span>
+          <h3 id="mod-nombre">Nombre de la Fuente</h3>
+        </div>
+        <button class="modal-cerrar" onclick="cerrarModalProveniencia()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-campo">
+          <span class="m-clave">Entidad Publicadora:</span>
+          <span class="m-valor" id="mod-entidad">—</span>
+        </div>
+        <div class="modal-campo">
+          <span class="m-clave">Licencia Legal:</span>
+          <span class="m-valor" id="mod-licencia">—</span>
+        </div>
+        <div class="modal-campo">
+          <span class="m-clave">Estado en el Sistema:</span>
+          <span class="m-valor" id="mod-estado">—</span>
+        </div>
+        <div class="modal-campo">
+          <span class="m-clave">Fecha de Prueba en Terminal:</span>
+          <span class="m-valor" id="mod-fecha">—</span>
+        </div>
+        <div class="modal-campo">
+          <span class="m-clave">Tratamiento de Personas (PII):</span>
+          <span class="m-valor" id="mod-pii">—</span>
+        </div>
+        <div class="modal-campo">
+          <span class="m-clave">URL Exacta de Descarga:</span>
+          <a class="m-valor-link" id="mod-url" href="#" target="_blank">—</a>
+        </div>
+        <div class="modal-campo">
+          <span class="m-clave">Uso en la Visualización y Gobernanza:</span>
+          <p class="m-valor-texto" id="mod-nota">—</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIE INSTITUCIONAL -->
+  <footer class="pie">
+    <div class="pie-contenido">
+      <div>
+        <strong>Cerebro Milán · Sistema Territorial de Información</strong>
+        <p>Taller de Sistemas de Información y Gobernanza de Datos · Universidad EAFIT 2026-2</p>
+        <p class="autores">Equipo: Alyson Henao · Mateo Sanz · Samuel Arango · Emily Cardona</p>
+      </div>
+      <div class="pie-derecha">
+        <span class="badge-pie">Proyección: EPSG:32632</span>
+        <span class="badge-pie">0 Llaves Pagas</span>
+        <span class="badge-pie">0 Servidores Propietarios</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
